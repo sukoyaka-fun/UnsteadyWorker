@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->BigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->bool('complete_flag');
+            $table->boolean('complete_flag');
             $table->date('due_date');
             $table->timestamps();
         });
