@@ -1,66 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Unsteady Worker
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 概要
+Unsteady Workerは、個人用のタスク管理アプリです。「個人が認識しているタスクのほとんど大部分は達成されないタスクである」という観察に基づき、個人が消化できるタスクの量を増やすことを目的としています。このアプリは、以下の方法でユーザーの意思決定を補助します。
 
-## About Laravel
+- タスク発生後3日を強制的に締切とし、todoリストを更新することで未達成タスクのスタックを抑制します。
+- 未達成タスクを適切な頻度と難易度でリストに再追加し、ユーザーにタスクへの着手を促します。
+- タスク間の依存関係を整理し、ユーザーが短期間で着手できる粒度に分割します。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+このようにして、「達成されないタスク」に情報を追加し、ユーザーの取捨選択を補助します。
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 目次
+- [概要](#概要)
+- [特徴](#特徴)
+- [動作方法](#動作方法)
+- [使い方](#使い方)
+- [作業進捗](#作業進捗)
+- [使用技術](#使用技術)
+- [ライセンス](#ライセンス)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 特徴
+- 未達成のタスクを流動させるように設計されています。
+- 個人用を想定しているため、タスクは進捗状態を詳細に管理しません。
+- タスクの締切を強制的に設定し、未達成タスクの再整理を促します。
 
-## Learning Laravel
+## 動作方法(Mac)
+プロジェクトのインストール手順を詳しく説明します。Docker Desktopをインストール済みであることを前提にしています。
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. プロジェクトのクローン
+```zsh
+git clone https://github.com/sukoyaka-fun/UnsteadyWorker.git
+cd UnsteadyWorker
+```
+2. アプリの起動
+```zsh
+sail up -d
+# 初回起動時のみデータベースのマイグレーション
+sail artisan migrate
+sail npm run dev
+``` 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. アプリへのアクセス
+webブラウザで [http://localhost](http://localhost) に接続
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. アプリの終了
+アプリ実行中のターミナル上で `ctrl+C`
+下記コマンドでコンテナを終了する。
+```zsh
+sail down
+```
 
-## Laravel Sponsors
+## 作業進捗
+データベースの設計、テーブル作成のマイグレーションをdocker環境で行いました。
+### ER図
+![ER図](images/ER_diagram.png)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 使用技術
+- フロントエンド: React.js
+- バックエンド:PHP, Laravelフレームワーク, Inertia(ReactとLaravelの連携)
+- データベース: PostgreSQL
+- 実行環境: Mac(Apple M1), docker
 
-### Premium Partners
+## ライセンス
+このプロジェクトは [CCZ1.0](LICENSE) のもとでライセンスされています。
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Laravelフレームワークは [MIT License](https://opensource.org/licenses/MIT) のもとでライセンスされています。
