@@ -44,6 +44,7 @@ webブラウザで [http://localhost](http://localhost) に接続
 
 4. アプリの終了
 アプリ実行中のターミナル上で `ctrl+C`
+
 下記コマンドでコンテナを終了する。
 ```zsh
 sail down
